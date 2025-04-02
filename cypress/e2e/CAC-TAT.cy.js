@@ -38,7 +38,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.get('button').click()
         cy.get('.error').should('be.visible')
     })
-    it.only('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+    it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
         cy.get('#firstName')
             .type('Fabíola')
             .should('have.value', 'Fabíola')
@@ -62,7 +62,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.get('.error').should('be.visible')
     })
 
-    it.only('envia o formuário com sucesso usando um comando customizado', () => {
+    it('envia o formuário com sucesso usando um comando customizado', () => {
         const data = {
             firstname: 'Fa',
             lastname: 'Angelo Silva',
@@ -72,5 +72,19 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.fillMandatoryFieldsAndSubmit(data)
         cy.get('.success').should('be.visible')
     })
-    
+    it('seleciona um produto (YouTube) por seu texto',()=>{
+        cy.get('#product')
+        .select('YouTube')
+        .should('have.value', 'youtube')
+    })
+    it('seleciona um produto (Mentoria) por seu valor (value)',()=>{
+        cy.get('#product')
+        .select('mentoria')
+        .should('have.value', 'mentoria')
+    })
+    it.only('seleciona um produto (Blog) por seu índice',()=>{
+        cy.get('#product')
+        .select(1)
+        .should('have.value', 'blog')
+    })
 })
