@@ -82,9 +82,22 @@ describe('Central de atendimento ao cliente TAT', () => {
         .select('mentoria')
         .should('have.value', 'mentoria')
     })
-    it.only('seleciona um produto (Blog) por seu índice',()=>{
+    it('seleciona um produto (Blog) por seu índice',()=>{
         cy.get('#product')
         .select(1)
         .should('have.value', 'blog')
+    })
+    it('marca o tipo de atendimento "Feedback"',()=>{
+        cy.get('input[type="radio"][value="feedback"]')
+        .check()
+        .should('be.checked')
+    })
+    it('marca cada tipo de atendimento',()=>{
+        cy.get('input[type="radio"]')
+        .each((typeOffService)=>{
+            cy.wrap(typeOffService)
+            .check()
+            .should('be.checked')
+        })
     })
 })
